@@ -17,7 +17,13 @@ def move_files(files, category):
                 os.rename(file, os.path.join(target_folder, normalized_name))
         except Exception as e:
             print(f"Failed process file {file}: {e}")
-def sort_failes(dirictory):
+def sort_files(directory):
+    for root, dirs, files in os.walk(directory, topdown=False):
+        for dir_name in dirs:
+            dir_path = os.path.join(root, dir_name)
+            if not os.listdir(dir_path):
+                os.rmdir(dir_path)
+
     images = ('.jpeg', '.png', '.jpg', '.svg')
     videos = ('.avi', '.mp4', '.mov', '.mkv')
     documents = ('.doc', '.docx', '.txt', '.pdf', '.xlsx', '.pptx')
@@ -27,7 +33,7 @@ def sort_failes(dirictory):
     unknown_extensions = set()
     known_extensions = set()
 
-    for root, dirs, files in os.walk(dirictory):
+    for root, dirs, files in os.walk(directory):
         for file in files:
             try:
                 _, extension = os.path.splitext(file)
@@ -64,4 +70,7 @@ if __name__ == "__main__":
     if len(sys.argv) != 2:
         print("Expected: python sort.py /path/to/directory")
         sys.exit(1)
+
+    target_directory = sys.argv[1]
+    sort_files(target_directory)
 
