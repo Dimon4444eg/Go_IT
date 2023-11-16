@@ -58,7 +58,6 @@ def sort_failes(dirictory):
         print(f"Unknown extensions: {', '.join(unknown_extensions)}")
 
 
-
 if __name__ == "__main__":
     import sys
 
