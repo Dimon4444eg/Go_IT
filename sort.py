@@ -53,7 +53,11 @@ def sort_files(directory):
                     extact_folder = os.path.join(os.path.dirname(archive_path), os.path.splitext(file)[0])
 
                     shutil.unpack_archive(archive_path, extact_folder)
-                    move_files([extact_folder], 'archives')
+
+                    archive_folder_name = os.path.splitext(file)[0]
+                    archive_target_folder = os.path.join(os.getcwd(), 'archives', archive_folder_name)
+
+                    shutil.move(extact_folder, archive_target_folder)
                 else:
                     unknown_extensions.add(extension)
             except Exception as e:
