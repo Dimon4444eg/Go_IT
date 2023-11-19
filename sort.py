@@ -1,3 +1,4 @@
+import sys
 import os
 import shutil
 import string
@@ -66,15 +67,14 @@ def sort_files(directory):
         print("Files sorted successfully.")
         print(f"Known extensions: {', '.join(known_extensions)}")
         print(f"Unknown extensions: {', '.join(unknown_extensions)}")
-
-
-if __name__ == "__main__":
-    import sys
-
+def main():
     if len(sys.argv) != 2:
         print("Expected: python sort.py /path/to/directory")
         sys.exit(1)
 
     target_directory = sys.argv[1]
     sort_files(target_directory)
+
+if __name__ == "__main__":
+    main()
 
